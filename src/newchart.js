@@ -1,5 +1,5 @@
 import "./styles.css";
-import { Chart } from "frappe-charts/dist/frappe-charts.min.esm";
+//import { Chart } from "frappe-charts/dist/frappe-charts.min.esm";
 
 const jsonQuery = {
     "query": [
@@ -104,14 +104,7 @@ async function showData (area) {
     });
 }
 
-const buttonSubmit = document.getElementById("submit-data");
-console.log(buttonSubmit);
-buttonSubmit.addEventListener("click", async () => {
-    event.preventDefault();
-    const inputArea = document.getElementById("input-area").value;
-    showData(inputArea);
-    console.log("Hello");
-});
+showData(inputArea);
 
 const buttonAdd = document.getElementById("add-data");
 console.log(buttonAdd);

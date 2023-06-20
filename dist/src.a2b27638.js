@@ -3523,7 +3523,7 @@ function _showData() {
 var buttonSubmit = document.getElementById("submit-data");
 console.log(buttonSubmit);
 buttonSubmit.addEventListener("click", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-  var inputArea;
+  var inputArea, newLink;
   return _regeneratorRuntime().wrap(function _callee$(_context) {
     while (1) switch (_context.prev = _context.next) {
       case 0:
@@ -3531,7 +3531,12 @@ buttonSubmit.addEventListener("click", /*#__PURE__*/_asyncToGenerator( /*#__PURE
         inputArea = document.getElementById("input-area").value;
         showData(inputArea);
         console.log("Hello");
-      case 4:
+        newLink = document.createElement("a");
+        newLink.id = navigation;
+        newLink.href = "/newchart.html?name='KU090'";
+        newLink.innerHTML = "View birth and death charts";
+        document.body.appendChild(newLink);
+      case 9:
       case "end":
         return _context.stop();
     }

@@ -111,6 +111,11 @@ buttonSubmit.addEventListener("click", async () => {
     const inputArea = document.getElementById("input-area").value;
     showData(inputArea);
     console.log("Hello");
+    const newLink = document.createElement("a");
+    newLink.id = navigation;
+    newLink.href = "/newchart.html?name='KU090'"
+    newLink.innerHTML = "View birth and death charts";
+    document.body.appendChild(newLink);
 });
 
 const buttonAdd = document.getElementById("add-data");
