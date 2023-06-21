@@ -1,7 +1,7 @@
 import "./styles.css";
 //import { Chart } from "frappe-charts/dist/frappe-charts.min.esm";
 
-const jsonQuery = {
+const jsonQueryBirth = {
     "query": [
         {
             "code": "Vuosi",
@@ -47,7 +47,63 @@ const jsonQuery = {
             "selection": {
                 "filter": "item",
                 "values": [
-                    "vaesto"
+                    "vm01"
+                ]
+            }
+        }
+    ],
+    "response": {
+        "format": "json-stat2"
+    }
+}
+
+const jsonQueryDeath = {
+    "query": [
+        {
+            "code": "Vuosi",
+            "selection": {
+                "filter": "item",
+                "values": [
+                    "2000",
+                    "2001",
+                    "2002",
+                    "2003",
+                    "2004",
+                    "2005",
+                    "2006",
+                    "2007",
+                    "2008",
+                    "2009",
+                    "2010",
+                    "2011",
+                    "2012",
+                    "2013",
+                    "2014",
+                    "2015",
+                    "2016",
+                    "2017",
+                    "2018",
+                    "2019",
+                    "2020",
+                    "2021"
+                ]
+            }
+        },
+        {
+            "code": "Alue",
+            "selection": {
+                "filter": "item",
+                "values": [
+                    "SSS"
+                ]
+            }
+        },
+        {
+            "code": "Tiedot",
+            "selection": {
+                "filter": "item",
+                "values": [
+                    "vm11"
                 ]
             }
         }
@@ -105,36 +161,4 @@ async function showData (area) {
 }
 
 showData(inputArea);
-
-const buttonAdd = document.getElementById("add-data");
-console.log(buttonAdd);
-buttonAdd.addEventListener("click", () => {
-    console.log("Hello again");
-    if (!chart) return;
-    let newValue = 0;
-    let num = 0;
-    console.log(chartData);
-    let previous = null;
-    let current = null;
-    chartData.datasets[0].values.forEach((point) =>{
-        console.log(point);
-        current = point;
-        num += 1;
-        if (!previous){
-            previous = current;
-        }
-        else {
-            newValue += current - previous;
-            console.log(newValue);
-            previous = current;
-        }
-        console.log("Current "+current);
-    })
-    if (current){
-        newValue = newValue / (num-1);
-        newValue += current;
-    }
-    console.log(newValue);
-    chart.addDataPoint("Next", [newValue]);
-});
 
