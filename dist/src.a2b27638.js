@@ -3465,7 +3465,6 @@ function _showData() {
           data2.variables[1].valueTexts.forEach(function (mun) {
             if (mun.toUpperCase() == area.toUpperCase()) {
               areaCode = data2.variables[1].values[i];
-              console.log("area=" + areaCode);
               return;
             }
             i++;
@@ -3522,7 +3521,6 @@ function _showData() {
   return _showData.apply(this, arguments);
 }
 var buttonSubmit = document.getElementById("submit-data");
-console.log(buttonSubmit);
 buttonSubmit.addEventListener("click", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
   var inputArea, newLink;
   return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -3545,33 +3543,26 @@ buttonSubmit.addEventListener("click", /*#__PURE__*/_asyncToGenerator( /*#__PURE
   }, _callee);
 })));
 var buttonAdd = document.getElementById("add-data");
-console.log(buttonAdd);
 buttonAdd.addEventListener("click", function () {
-  console.log("Hello again");
   if (!chart) return;
   var newValue = 0;
   var num = 0;
-  console.log(chartData);
   var previous = null;
   var current = null;
   chartData.datasets[0].values.forEach(function (point) {
-    console.log(point);
     current = point;
     num += 1;
     if (!previous) {
       previous = current;
     } else {
       newValue += current - previous;
-      console.log(newValue);
       previous = current;
     }
-    console.log("Current " + current);
   });
   if (current) {
     newValue = newValue / (num - 1);
     newValue += current;
   }
-  console.log(newValue);
   chart.addDataPoint("Next", [newValue]);
 });
 },{"./styles.css":"src/styles.css","frappe-charts/dist/frappe-charts.min.esm":"node_modules/frappe-charts/dist/frappe-charts.min.esm.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {

@@ -121,7 +121,6 @@ async function showData () {
     let areaCode = queryString.get("area");
     areaCode = areaCode.replaceAll("'", '');
 //    let queryString = window.location.search;
-    console.log("Pöö "+areaCode);
     const url1 = "https://statfin.stat.fi/PxWeb/api/v1/en/StatFin/synt/statfin_synt_pxt_12dy.px";
     const res2 = await fetch(url1);
     const data2 = await res2.json();
@@ -139,7 +138,6 @@ async function showData () {
     if (!area) return;
 
     jsonQueryBirth.query[1].selection.values[0] = areaCode;
-    console.log(jsonQueryBirth);
     let res = await fetch(url1, {
         method: "POST",
         headers: {"content-type": "application/json"},

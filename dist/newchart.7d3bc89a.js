@@ -3479,23 +3479,22 @@ function _showData() {
           areaCode = queryString.get("area");
           areaCode = areaCode.replaceAll("'", '');
           //    let queryString = window.location.search;
-          console.log("Pöö " + areaCode);
           url1 = "https://statfin.stat.fi/PxWeb/api/v1/en/StatFin/synt/statfin_synt_pxt_12dy.px";
-          _context.next = 7;
+          _context.next = 6;
           return fetch(url1);
-        case 7:
+        case 6:
           res2 = _context.sent;
-          _context.next = 10;
+          _context.next = 9;
           return res2.json();
-        case 10:
+        case 9:
           data2 = _context.sent;
           i = 0;
           if (areaCode) {
-            _context.next = 14;
+            _context.next = 13;
             break;
           }
           return _context.abrupt("return");
-        case 14:
+        case 13:
           area = "";
           data2.variables[1].values.forEach(function (mun) {
             if (mun == areaCode) {
@@ -3505,14 +3504,13 @@ function _showData() {
             i++;
           });
           if (area) {
-            _context.next = 18;
+            _context.next = 17;
             break;
           }
           return _context.abrupt("return");
-        case 18:
+        case 17:
           jsonQueryBirth.query[1].selection.values[0] = areaCode;
-          console.log(jsonQueryBirth);
-          _context.next = 22;
+          _context.next = 20;
           return fetch(url1, {
             method: "POST",
             headers: {
@@ -3520,20 +3518,20 @@ function _showData() {
             },
             body: JSON.stringify(jsonQueryBirth)
           });
-        case 22:
+        case 20:
           res = _context.sent;
           if (res.ok) {
-            _context.next = 25;
+            _context.next = 23;
             break;
           }
           return _context.abrupt("return");
-        case 25:
-          _context.next = 27;
+        case 23:
+          _context.next = 25;
           return res.json();
-        case 27:
+        case 25:
           data1 = _context.sent;
           jsonQueryDeath.query[1].selection.values[0] = areaCode;
-          _context.next = 31;
+          _context.next = 29;
           return fetch(url1, {
             method: "POST",
             headers: {
@@ -3541,17 +3539,17 @@ function _showData() {
             },
             body: JSON.stringify(jsonQueryDeath)
           });
-        case 31:
+        case 29:
           res = _context.sent;
           if (res.ok) {
-            _context.next = 34;
+            _context.next = 32;
             break;
           }
           return _context.abrupt("return");
-        case 34:
-          _context.next = 36;
+        case 32:
+          _context.next = 34;
           return res.json();
-        case 36:
+        case 34:
           data3 = _context.sent;
           chartData = {
             labels: Object.values(data1.dimension.Vuosi.category.label),
@@ -3572,7 +3570,7 @@ function _showData() {
             height: 450,
             colors: ["#63d0ff", "#363636"]
           });
-        case 39:
+        case 37:
         case "end":
           return _context.stop();
       }

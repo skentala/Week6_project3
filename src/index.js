@@ -69,7 +69,6 @@ async function showData (area) {
     data2.variables[1].valueTexts.forEach((mun) => {
         if (mun.toUpperCase() == area.toUpperCase()) {
             areaCode = data2.variables[1].values[i];
-            console.log("area="+areaCode);
             return;
         }
         i++;
@@ -106,7 +105,6 @@ async function showData (area) {
 }
 
 const buttonSubmit = document.getElementById("submit-data");
-console.log(buttonSubmit);
 buttonSubmit.addEventListener("click", async () => {
     event.preventDefault();
     const inputArea = document.getElementById("input-area").value;
@@ -119,17 +117,13 @@ buttonSubmit.addEventListener("click", async () => {
 });
 
 const buttonAdd = document.getElementById("add-data");
-console.log(buttonAdd);
 buttonAdd.addEventListener("click", () => {
-    console.log("Hello again");
     if (!chart) return;
     let newValue = 0;
     let num = 0;
-    console.log(chartData );
     let previous = null;
     let current = null;
     chartData.datasets[0].values.forEach((point) =>{
-        console.log(point);
         current = point;
         num += 1;
         if (!previous){
@@ -137,16 +131,13 @@ buttonAdd.addEventListener("click", () => {
         }
         else {
             newValue += current - previous;
-            console.log(newValue);
             previous = current;
         }
-        console.log("Current "+current);
     })
     if (current){
         newValue = newValue / (num-1);
         newValue += current;
     }
-    console.log(newValue);
     chart.addDataPoint("Next", [newValue]);
 });
 
