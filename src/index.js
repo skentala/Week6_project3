@@ -141,3 +141,4 @@ buttonAdd.addEventListener("click", () => {
     chart.addDataPoint("Next", [newValue]);
 });
 
+showData("whole country");

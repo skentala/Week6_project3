@@ -3565,6 +3565,7 @@ buttonAdd.addEventListener("click", function () {
   }
   chart.addDataPoint("Next", [newValue]);
 });
+showData("whole country");
 },{"./styles.css":"src/styles.css","frappe-charts/dist/frappe-charts.min.esm":"node_modules/frappe-charts/dist/frappe-charts.min.esm.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
