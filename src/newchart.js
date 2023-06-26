@@ -1,5 +1,5 @@
 import "./styles.css";
-//import { Chart } from "frappe-charts/dist/frappe-charts.min.esm";
+import { Chart } from "frappe-charts/dist/frappe-charts.min.esm";
 
 const jsonQueryBirth = {
     "query": [
@@ -116,49 +116,70 @@ const jsonQueryDeath = {
 let chartData = [];
 let chart = null;
 
-async function showData (area) {
+async function showData () {
+    const queryString = new URLSearchParams(window.location.search);
+    let areaCode = queryString.get("area");
+    areaCode = areaCode.replaceAll("'", '');
+//    let queryString = window.location.search;
+    console.log("Pöö "+areaCode);
     const url1 = "https://statfin.stat.fi/PxWeb/api/v1/en/StatFin/synt/statfin_synt_pxt_12dy.px";
     const res2 = await fetch(url1);
     const data2 = await res2.json();
     let i = 0;
-    let areaCode = "";
-    data2.variables[1].valueTexts.forEach((mun) => {
-        if (mun.toUpperCase() == area.toUpperCase()) {
-            areaCode = data2.variables[1].values[i];
+    if (!areaCode) return;
+
+    let area = "";
+    data2.variables[1].values.forEach((mun) => {
+        if (mun == areaCode) {
+            area = data2.variables[1].valueTexts[i];
             return;
         }
         i++;
     });
-    if (!areaCode) return;
-    jsonQuery.query[1].selection.values[0] = areaCode;
-    const res1 = await fetch(url1, {
+    if (!area) return;
+
+    jsonQueryBirth.query[1].selection.values[0] = areaCode;
+    console.log(jsonQueryBirth);
+    let res = await fetch(url1, {
         method: "POST",
         headers: {"content-type": "application/json"},
-        body: JSON.stringify(jsonQuery)
+        body: JSON.stringify(jsonQueryBirth)
     });
-    if (!res1.ok) return;
-    const data1 = await res1.json();
+    if (!res.ok) return;
+    const data1 = await res.json();
+
+    jsonQueryDeath.query[1].selection.values[0] = areaCode;
+    res = await fetch(url1, {
+        method: "POST",
+        headers: {"content-type": "application/json"},
+        body: JSON.stringify(jsonQueryDeath)
+    });
+    if (!res.ok) return;
+    const data3 = await res.json();
 
 
     chartData = {
         labels: Object.values(data1.dimension.Vuosi.category.label),
         datasets: [
             {
-                name: "Population",
+                name: "Births",
                 values: data1.value
+            },
+            {
+                name: "Deaths",
+                values: data3.value
             }
         ]
     }
 //  console.log(chartData);
 
     chart = new Chart("#chart", {
-        title: `Population in ${area}`,
+        title: `Births and deaths in ${area}`,
         data: chartData,
-        type: "line",
+        type: "bar",
         height: 450,
-        colors: ["#eb5146"]
+        colors: ["#63d0ff", "#363636"]
     });
 }
 
-showData(inputArea);
-
+showData();

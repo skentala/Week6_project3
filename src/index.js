@@ -59,16 +59,17 @@ const jsonQuery = {
 
 let chartData = [];
 let chart = null;
+let areaCode = "";
 
 async function showData (area) {
     const url1 = "https://statfin.stat.fi/PxWeb/api/v1/en/StatFin/synt/statfin_synt_pxt_12dy.px";
     const res2 = await fetch(url1);
     const data2 = await res2.json();
     let i = 0;
-    let areaCode = "";
     data2.variables[1].valueTexts.forEach((mun) => {
         if (mun.toUpperCase() == area.toUpperCase()) {
             areaCode = data2.variables[1].values[i];
+            console.log("area="+areaCode);
             return;
         }
         i++;
@@ -109,11 +110,10 @@ console.log(buttonSubmit);
 buttonSubmit.addEventListener("click", async () => {
     event.preventDefault();
     const inputArea = document.getElementById("input-area").value;
-    showData(inputArea);
-    console.log("Hello");
+    await showData(inputArea);
     const newLink = document.createElement("a");
     newLink.id = navigation;
-    newLink.href = "/newchart.html?name='KU090'"
+    newLink.href = `/newchart.html?area='${areaCode}'`;
     newLink.innerHTML = "View birth and death charts";
     document.body.appendChild(newLink);
 });
@@ -125,7 +125,7 @@ buttonAdd.addEventListener("click", () => {
     if (!chart) return;
     let newValue = 0;
     let num = 0;
-    console.log(chartData);
+    console.log(chartData );
     let previous = null;
     let current = null;
     chartData.datasets[0].values.forEach((point) =>{

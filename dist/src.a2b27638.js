@@ -3442,12 +3442,13 @@ var jsonQuery = {
 };
 var chartData = [];
 var chart = null;
+var areaCode = "";
 function showData(_x) {
   return _showData.apply(this, arguments);
 }
 function _showData() {
   _showData = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(area) {
-    var url1, res2, data2, i, areaCode, res1, data1;
+    var url1, res2, data2, i, res1, data1;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
@@ -3461,22 +3462,22 @@ function _showData() {
         case 6:
           data2 = _context2.sent;
           i = 0;
-          areaCode = "";
           data2.variables[1].valueTexts.forEach(function (mun) {
             if (mun.toUpperCase() == area.toUpperCase()) {
               areaCode = data2.variables[1].values[i];
+              console.log("area=" + areaCode);
               return;
             }
             i++;
           });
           if (areaCode) {
-            _context2.next = 12;
+            _context2.next = 11;
             break;
           }
           return _context2.abrupt("return");
-        case 12:
+        case 11:
           jsonQuery.query[1].selection.values[0] = areaCode;
-          _context2.next = 15;
+          _context2.next = 14;
           return fetch(url1, {
             method: "POST",
             headers: {
@@ -3484,17 +3485,17 @@ function _showData() {
             },
             body: JSON.stringify(jsonQuery)
           });
-        case 15:
+        case 14:
           res1 = _context2.sent;
           if (res1.ok) {
-            _context2.next = 18;
+            _context2.next = 17;
             break;
           }
           return _context2.abrupt("return");
-        case 18:
-          _context2.next = 20;
+        case 17:
+          _context2.next = 19;
           return res1.json();
-        case 20:
+        case 19:
           data1 = _context2.sent;
           chartData = {
             labels: Object.values(data1.dimension.Vuosi.category.label),
@@ -3512,7 +3513,7 @@ function _showData() {
             height: 450,
             colors: ["#eb5146"]
           });
-        case 23:
+        case 22:
         case "end":
           return _context2.stop();
       }
@@ -3529,11 +3530,12 @@ buttonSubmit.addEventListener("click", /*#__PURE__*/_asyncToGenerator( /*#__PURE
       case 0:
         event.preventDefault();
         inputArea = document.getElementById("input-area").value;
-        showData(inputArea);
-        console.log("Hello");
+        _context.next = 4;
+        return showData(inputArea);
+      case 4:
         newLink = document.createElement("a");
         newLink.id = navigation;
-        newLink.href = "/newchart.html?name='KU090'";
+        newLink.href = "/newchart.html?area='".concat(areaCode, "'");
         newLink.innerHTML = "View birth and death charts";
         document.body.appendChild(newLink);
       case 9:
@@ -3597,7 +3599,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "32921" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33321" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
