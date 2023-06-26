@@ -3532,7 +3532,7 @@ buttonSubmit.addEventListener("click", /*#__PURE__*/_asyncToGenerator( /*#__PURE
         return showData(inputArea);
       case 4:
         newLink = document.createElement("a");
-        newLink.id = navigation;
+        newLink.id = 'navigation';
         newLink.href = "/newchart.html?area='".concat(areaCode, "'");
         newLink.innerHTML = "View birth and death charts";
         document.body.appendChild(newLink);

@@ -110,7 +110,7 @@ buttonSubmit.addEventListener("click", async () => {
     const inputArea = document.getElementById("input-area").value;
     await showData(inputArea);
     const newLink = document.createElement("a");
-    newLink.id = navigation;
+    newLink.id = 'navigation';
     newLink.href = `/newchart.html?area='${areaCode}'`;
     newLink.innerHTML = "View birth and death charts";
     document.body.appendChild(newLink);
